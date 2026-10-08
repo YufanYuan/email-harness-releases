@@ -12,10 +12,9 @@ Packages become available after the release pipeline is enabled and its first bu
 | Computer | Package |
 | --- | --- |
 | Mac with Apple Silicon (M-series) | `Email-Workbench-mac-arm64.zip` |
-| Mac with Intel processor | `Email-Workbench-mac-x64.zip` |
 | Windows with Intel/AMD 64-bit processor | `Email-Workbench-win-x64.exe` |
 
-Each release includes `SHA256SUMS` for checking the downloaded files. Choose the architecture that matches your computer. Windows ARM and Linux are not currently built.
+Each release includes `SHA256SUMS` for checking the downloaded files. Choose the architecture that matches your computer. New builds target macOS Apple Silicon and Windows x64; Intel Macs, Windows ARM and Linux are not built. Older releases may still contain an Intel Mac package.
 
 Download your selected package and SHA256SUMS into the same directory. For an Apple Silicon Mac, check just that package:
 
@@ -23,7 +22,7 @@ Download your selected package and SHA256SUMS into the same directory. For an Ap
 grep '  Email-Workbench-mac-arm64.zip$' SHA256SUMS | shasum -a 256 -c -
 ```
 
-For an Intel Mac, substitute `Email-Workbench-mac-x64.zip`. On Windows, use `Get-FileHash .\Email-Workbench-win-x64.exe -Algorithm SHA256` in PowerShell and compare the Hash value with that file's line in SHA256SUMS. You do not need to download packages for the other platforms.
+On Windows, use `Get-FileHash .\Email-Workbench-win-x64.exe -Algorithm SHA256` in PowerShell and compare the Hash value with that file's line in SHA256SUMS. You do not need to download packages for the other platforms.
 
 ## Trying the app
 

@@ -26,9 +26,11 @@ On Windows, use `Get-FileHash .\Email-Workbench-win-x64.exe -Algorithm SHA256` i
 
 ## Trying the app
 
-These are unsigned alpha builds. macOS Gatekeeper and Windows SmartScreen may require you to explicitly approve launching a trusted downloaded application. No signing or notarization is claimed.
+Older alpha builds were unsigned. A macOS build made with the old configuration can have an invalid application signature and show “damaged and can't be opened”; those files are not repaired by later workflow changes. Obtain a corrected release rather than granting an exception to a package whose signature fails verification.
 
-On macOS, extract the ZIP, move Email Workbench.app to Applications, and use the system's Privacy & Security controls if macOS blocks the first launch. On Windows, run the portable EXE; no installer is required. Use only packages downloaded from this repository and compare the checksum before granting an exception.
+The corrected release workflow requires Developer ID signing and Apple notarization by default. New releases can be published only after the maintainer configures the signing certificate and notarization credentials. Explicit ad-hoc test packages remain unnotarized and require a local Gatekeeper exception; they are not normal trusted downloads.
+
+On macOS, verify the checksum, extract the ZIP and move Email Workbench.app to Applications. Verify its complete signature with `codesign --verify --deep --strict --verbose=2 "/Applications/Email Workbench.app"`. For a notarized release, Gatekeeper should accept the application normally. On Windows, run the portable EXE; no installer is required. Windows builds remain unsigned and SmartScreen may show a warning.
 
 Start by adding your own mailbox. Generic IMAP/POP3 plus SMTP is available; Gmail/Outlook browser login requires publisher registration configuration in that particular build. Each release states whether that configuration was included. No mailbox credentials or local user data are shipped in a release.
 
@@ -38,6 +40,6 @@ Data is stored locally on each computer. Downloading the app on another computer
 
 ## Release channels
 
-All expected platform builds must succeed before publication. Main releases preserve history. The fixed autobuild is replaced only after a complete new package set is staged; a failed build keeps the previous download available. Releases identify their build time and source revision.
+Pull requests run checks without building installation packages; builds and publication run after changes reach dev or main. All expected platform builds and macOS signing/trust checks must succeed before publication. Main releases preserve history. The fixed autobuild is replaced only after a complete new package set is staged; a failed build keeps the previous download available. Releases identify their build time and source revision.
 
 This repository is for trial distribution. Native system integration and real mailbox behavior should be verified on your target computer before relying on an alpha build.

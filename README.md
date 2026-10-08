@@ -17,6 +17,14 @@ Packages become available after the release pipeline is enabled and its first bu
 
 Each release includes `SHA256SUMS` for checking the downloaded files. Choose the architecture that matches your computer. Windows ARM and Linux are not currently built.
 
+Download your selected package and SHA256SUMS into the same directory. For an Apple Silicon Mac, check just that package:
+
+```sh
+grep '  Email-Workbench-mac-arm64.zip$' SHA256SUMS | shasum -a 256 -c -
+```
+
+For an Intel Mac, substitute `Email-Workbench-mac-x64.zip`. On Windows, use `Get-FileHash .\Email-Workbench-win-x64.exe -Algorithm SHA256` in PowerShell and compare the Hash value with that file's line in SHA256SUMS. You do not need to download packages for the other platforms.
+
 ## Trying the app
 
 These are unsigned alpha builds. macOS Gatekeeper and Windows SmartScreen may require you to explicitly approve launching a trusted downloaded application. No signing or notarization is claimed.
